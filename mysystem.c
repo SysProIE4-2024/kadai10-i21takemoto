@@ -7,15 +7,14 @@
 #include <unistd.h>    // fork, execXX のため
 #include <sys/wait.h>  // wait のため
 #include "mysystem.h"  // インタフェース
-
+static char *execpath = "/bin/sh";
 // system関数のクローン
 int mysystem(char *command) {
-  static char *execpath = "/bin/sh";
+  
   int status = 0;
   // ここにプログラムを書く
   pid_t pid;
   if((pid=fork())<0){
-    perror(command);
     return -1;
   }
   if(pid!=0){
@@ -24,7 +23,6 @@ int mysystem(char *command) {
       
   }else{
     execl(execpath, "sh", "-c", command, (char *)NULL);
-    perror(command);
     exit(127);
   }
   return status;
@@ -69,4 +67,14 @@ retval = 00000000
 takemotoai@takemotoainoMacBook-Air kadai10-i21takemoto % ./mysysmain 
 使い方 : ./mysysmain コマンド文字列
 
+takemotoai@takemotoainoMacBook-Air kadai10-i21takemoto % ./mysysmain aaa
+mysystem:
+sh: aaa: command not found
+retval = 00007f00
+system:
+sh: aaa: command not found
+retval = 00007f00
+
+takemotoai@takemotoainoMacBook-Air kadai10-i21takemoto % ./mysysmain echo a.txt
+使い方 : ./mysysmain コマンド文字列
 */
