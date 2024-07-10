@@ -77,4 +77,15 @@ retval = 00007f00
 
 takemotoai@takemotoainoMacBook-Air kadai10-i21takemoto % ./mysysmain echo a.txt
 使い方 : ./mysysmain コマンド文字列
+
+takemotoai@takemotoainoMacBook-Air kadai10-i21takemoto % ./mysysmain "rm"             
+mysystem:
+usage: rm [-f | -i] [-dIPRrvWx] file ...
+       unlink [--] file
+retval = 00004000
+system:
+usage: rm [-f | -i] [-dIPRrvWx] file ...
+       unlink [--] file
+retval = 00004000
+
 */
